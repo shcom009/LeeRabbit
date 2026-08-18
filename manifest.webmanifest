@@ -1,0 +1,11 @@
+{
+  "name":"이토끼 예뻐해주기",
+  "short_name":"이토끼",
+  "description":"하루에 한 번 이토끼의 소원을 뽑아보는 작은 앱",
+  "start_url":"./",
+  "scope":"./",
+  "display":"standalone",
+  "background_color":"#fff3f6",
+  "theme_color":"#ff8fa8",
+  "icons":[{"src":"rabbit_female_icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}
