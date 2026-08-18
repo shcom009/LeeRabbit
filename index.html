@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>이토끼 예뻐해주기</title>
+  <link rel="icon" href="rabbit_female_icon.png" />
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, "Noto Sans KR", sans-serif;
+      background: #fff3f6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      overflow-x: hidden;
+    }
+    .card {
+      position: relative;
+      width: min(92vw, 420px);
+      background: #fff;
+      border-radius: 28px;
+      padding: 32px 24px 34px;
+      text-align: center;
+      box-shadow: 0 16px 40px rgba(193, 104, 125, .15);
+      border: 1px solid #ffe0e7;
+      overflow: hidden;
+    }
+    .rabbit {
+      width: 154px;
+      height: 154px;
+      object-fit: contain;
+      border-radius: 28px;
+      margin-bottom: 12px;
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: 30px;
+      color: #2b2225;
+    }
+    .desc {
+      margin: 0 0 26px;
+      color: #80666e;
+      line-height: 1.6;
+      font-size: 15px;
+    }
+    #wishButton {
+      width: 100%;
+      border: 0;
+      border-radius: 16px;
+      padding: 17px 18px;
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+      background: linear-gradient(135deg, #ff7f9c, #ff9caf);
+      box-shadow: 0 8px 18px rgba(255,127,156,.28);
+      cursor: pointer;
+      transition: transform .15s ease, opacity .15s ease;
+    }
+    #wishButton:active { transform: scale(.98); }
+    #result {
+      min-height: 104px;
+      margin-top: 28px;
+      padding: 20px 16px;
+      border-radius: 18px;
+      background: #fff7f9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      color: #3a2b30;
+    }
+    .label {
+      color: #c66f86;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .prize {
+      font-size: 26px;
+      font-weight: 800;
+      line-height: 1.35;
+    }
+    .used {
+      font-size: 20px;
+      font-weight: 700;
+      color: #9b6e7b;
+      line-height: 1.5;
+    }
+    .date-note {
+      margin-top: 15px;
+      font-size: 13px;
+      color: #a88b94;
+    }
+    .confetti {
+      position: fixed;
+      top: -20px;
+      width: 10px;
+      height: 16px;
+      border-radius: 2px;
+      pointer-events: none;
+      z-index: 9999;
+      animation: fall linear forwards;
+    }
+    @keyframes fall {
+      0% { transform: translate3d(0,-20px,0) rotate(0deg); opacity: 1; }
+      100% { transform: translate3d(var(--drift),110vh,0) rotate(760deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <img src="rabbit_female_icon.png" class="rabbit" alt="귀에 리본을 단 이토끼" />
+    <h1>이토끼 예뻐해주기</h1>
+    <p class="desc">오늘 이토끼에게 해줄 한 가지를 뽑아보세요 🐰🎀<br>소원은 하루에 한 번만 뽑을 수 있어요.</p>
+
+    <button id="wishButton">이토끼 예뻐해주기</button>
+
+    <section id="result" aria-live="polite">
+      <div class="used">버튼을 눌러 오늘의 소원을 뽑아보세요 💕</div>
+    </section>
+
+    <div class="date-note">날짜가 바뀌면 다시 참여할 수 있습니다.</div>
+  </main>
+
+  <script>
+    const prizes = [
+      "뽀뽀해주기",
+      "업어주기",
+      "산책해주기",
+      "5분간 놀아주기",
+      "간식 먹기"
+    ];
+
+    const STORAGE_KEY = "leeRabbitWishDaily";
+
+    function todayKey() {
+      const now = new Date();
+      const y = now.getFullYear();
+      const m = String(now.getMonth() + 1).padStart(2, "0");
+      const d = String(now.getDate()).padStart(2, "0");
+      return `${y}-${m}-${d}`;
+    }
+
+    function loadTodayResult() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
+        if (saved && saved.date === todayKey() && saved.prize) return saved;
+      } catch (_) {}
+      return null;
+    }
+
+    function saveTodayResult(prize) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        date: todayKey(),
+        prize
+      }));
+    }
+
+    function showPrize(prize) {
+      document.getElementById("result").innerHTML =
+        `<div class="label">🎉 오늘의 당첨 🎉</div><div class="prize">${prize}</div>`;
+    }
+
+    function showAlreadyUsed(saved) {
+      document.getElementById("result").innerHTML =
+        `<div class="used">소원은 하루에 한개입니다~ 🐰<br><small>오늘의 소원: ${saved.prize}</small></div>`;
+    }
+
+    function fireConfetti() {
+      const colors = ["#ff7795", "#ffb3c2", "#ffd766", "#8fd9bd", "#a7bfff", "#d7a6ff"];
+      for (let i = 0; i < 90; i++) {
+        const c = document.createElement("span");
+        c.className = "confetti";
+        c.style.left = Math.random() * 100 + "vw";
+        c.style.background = colors[Math.floor(Math.random() * colors.length)];
+        c.style.animationDuration = (1.8 + Math.random() * 1.8) + "s";
+        c.style.animationDelay = (Math.random() * .35) + "s";
+        c.style.setProperty("--drift", ((Math.random() - .5) * 240) + "px");
+        c.style.transform = `rotate(${Math.random() * 360}deg)`;
+        document.body.appendChild(c);
+        setTimeout(() => c.remove(), 4200);
+      }
+    }
+
+    const button = document.getElementById("wishButton");
+    const initial = loadTodayResult();
+    if (initial) showAlreadyUsed(initial);
+
+    button.addEventListener("click", () => {
+      const existing = loadTodayResult();
+      if (existing) {
+        showAlreadyUsed(existing);
+        return;
+      }
+
+      const prize = prizes[Math.floor(Math.random() * prizes.length)];
+      saveTodayResult(prize);
+      fireConfetti();
+      showPrize(prize);
+    });
+  </script>
+</body>
+</html>
