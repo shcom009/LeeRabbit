@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#ff8fa8">
-<title>이토끼 예뻐해주기</title>
+<title>이토끼 행운 룰렛</title>
 <meta name="description" content="룰렛을 돌려 오늘 이토끼에게 해줄 귀여운 소원을 뽑아보세요 🐰🎀">
 <meta property="og:type" content="website">
-<meta property="og:title" content="🐰 이토끼 예뻐해주기">
+<meta property="og:title" content="🐰 이토끼 행운 룰렛">
 <meta property="og:description" content="룰렛을 돌려 오늘 이토끼에게 해줄 귀여운 소원을 뽑아보세요 💕">
 <meta property="og:url" content="https://shcom009.github.io/LeeRabbit/">
 <meta property="og:image" content="https://shcom009.github.io/LeeRabbit/rabbit_pair.png?v=9">
@@ -16,13 +16,19 @@
 <link rel="manifest" href="manifest.webmanifest">
 <style>
 *{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:Arial,"Noto Sans KR",sans-serif;background:#fff3f6;display:flex;align-items:center;justify-content:center;padding:18px;overflow-x:hidden}.card{width:min(94vw,430px);background:#fff;border:1px solid #ffe0e7;border-radius:28px;padding:22px 20px 28px;text-align:center;box-shadow:0 16px 40px rgba(193,104,125,.15);overflow:hidden}h1{margin:0 0 14px;font-size:21px;line-height:1.2;color:#2b2225}.rabbit{width:min(68%,210px);height:auto;display:block;object-fit:contain;border-radius:22px;margin:0 auto 16px}.desc{margin:0 0 20px;color:#80666e;line-height:1.6;font-size:14px}.roulette-title{min-height:34px;margin:4px 0 16px;font-size:21px;font-weight:800;color:#ff5f82;display:flex;align-items:center;justify-content:center;cursor:pointer}.roulette-wrap{position:relative;width:min(80vw,300px);aspect-ratio:1;margin:0 auto 12px}.pointer{position:absolute;z-index:5;top:-10px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:18px solid transparent;border-right:18px solid transparent;border-top:34px solid #ff4f78;filter:drop-shadow(0 3px 3px rgba(0,0,0,.18))}.wheel{position:absolute;inset:0;border-radius:50%;border:10px solid #ff8faa;background:conic-gradient(from -20deg,#ffe29a 0 40deg,#ff9bbb 40deg 80deg,#cdb8ff 80deg 120deg,#9edff0 120deg 160deg,#b7e6b3 160deg 200deg,#ffc3d1 200deg 240deg,#f6c1ff 240deg 280deg,#aee8d8 280deg 320deg,#ffd3a5 320deg 360deg);box-shadow:0 10px 24px rgba(255,108,143,.25),inset 0 0 0 4px #fff;transition:transform 2s cubic-bezier(.12,.72,.12,1);cursor:pointer;will-change:transform}.wheel:after{content:"♥";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:68px;height:68px;border-radius:50%;display:grid;place-items:center;background:#ff5f82;color:#fff;font-size:34px;font-weight:900;border:5px solid #fff;box-shadow:0 4px 10px rgba(0,0,0,.14)}.wheel.spinning{pointer-events:none}.item{position:absolute;left:50%;top:50%;width:42px;height:42px;margin:-21px;display:grid;place-items:center;font-size:28px;transform:rotate(var(--a)) translateY(-105px) rotate(calc(-1 * var(--a)));text-shadow:0 2px 2px rgba(255,255,255,.9)}.date-note{margin-top:18px;font-size:12px;color:#a88b94}.confetti{position:fixed;top:-20px;width:10px;height:16px;border-radius:2px;pointer-events:none;z-index:9999;animation:fall linear forwards}@keyframes fall{0%{opacity:1}100%{transform:translate3d(var(--drift),110vh,0) rotate(760deg);opacity:0}}@media(max-width:520px){body{padding:10px}.card{width:100%;padding:18px 16px 24px;border-radius:26px}h1{font-size:20px}.rabbit{width:min(65%,200px)}.roulette-wrap{width:min(76vw,290px)}.roulette-title{font-size:20px}.item{transform:rotate(var(--a)) translateY(-100px) rotate(calc(-1 * var(--a)))}}
+/* 행운 룰렛 시안 디자인: 기존 토끼 이미지와 룰렛 구조는 유지 */
+h1{position:relative;margin:0 0 16px;font-family:"Arial Rounded MT Bold","Noto Sans KR",sans-serif;font-size:clamp(32px,9vw,45px);font-weight:900;line-height:1.12;letter-spacing:-2.4px;color:#662713;-webkit-text-stroke:5px #fff;paint-order:stroke fill;filter:drop-shadow(0 5px 0 #ffc3d1) drop-shadow(0 8px 2px rgba(181,71,105,.18))}
+h1:before,h1:after{position:absolute;top:50%;transform:translateY(-50%);color:#ff6f91;-webkit-text-stroke:0;filter:none;font-size:.48em}h1:before{content:"♥";left:0}h1:after{content:"♥";right:0}
+.rabbit{margin-bottom:14px}
+.roulette-title{position:relative;min-height:92px;margin:0 0 16px;padding:15px 34px;border:5px solid #ff7e9e;border-radius:28px;background:linear-gradient(135deg,#fffaf0,#fffdf8);box-shadow:0 8px 18px rgba(255,95,130,.2),inset 0 0 0 3px #fff;font-size:clamp(23px,6.8vw,31px);line-height:1.25;font-weight:900;letter-spacing:-1.3px;color:#f23870;word-break:keep-all}
+.roulette-title:before,.roulette-title:after{content:"🎉";position:absolute;bottom:12px;font-size:24px}.roulette-title:before{left:10px}.roulette-title:after{right:10px;transform:scaleX(-1)}.roulette-title.spinning:before,.roulette-title.spinning:after{content:"✨"}
+@media(max-width:520px){h1{font-size:clamp(30px,9vw,40px)}.roulette-title{min-height:88px;font-size:clamp(22px,6.6vw,29px)}}
 </style>
 </head>
 <body>
 <main class="card">
-<h1>이토끼 예뻐해주기</h1>
+<h1>이토끼 행운 룰렛</h1>
 <img src="rabbit_pair.png?v=9" class="rabbit" alt="나비넥타이를 맨 토끼와 귀에 리본을 단 토끼">
-<p class="desc">이토끼에게 해줄 한 가지를 룰렛으로 뽑아보세요 🐰🎀<br>마음에 들 때까지 언제든 다시 돌릴 수 있어요.</p>
 <div id="rouletteTitle" class="roulette-title" aria-live="polite">룰렛을 돌려 보세요</div>
 <div class="roulette-wrap" aria-label="소원 룰렛">
 <div class="pointer"></div>
@@ -36,7 +42,7 @@
 const prizes=["뽀뽀해주기","업어주기","산책해주기","5분간 놀아주기","간식 먹기","꼭 안아주기","뽀뽀 3번 해주기","마사지 해주기","귀찮은 일 대신해 주기"];
 const wheel=document.getElementById("wheel"),title=document.getElementById("rouletteTitle");let spinning=false,currentRotation=0;
 function fireConfetti(){const colors=["#ff7795","#ffb3c2","#ffd766","#8fd9bd","#a7bfff","#d7a6ff"];for(let i=0;i<110;i++){const c=document.createElement("span");c.className="confetti";c.style.left=Math.random()*100+"vw";c.style.background=colors[Math.floor(Math.random()*colors.length)];c.style.animationDuration=1.8+Math.random()*1.8+"s";c.style.animationDelay=Math.random()*.3+"s";c.style.setProperty("--drift",(Math.random()-.5)*260+"px");document.body.appendChild(c);setTimeout(()=>c.remove(),4200)}}
-function spin(){if(spinning)return;spinning=true;title.textContent="룰렛이 돌아가고 있어요… 🎀";wheel.classList.add("spinning");const index=Math.floor(Math.random()*prizes.length);const rounds=5+Math.floor(Math.random()*3);const sector=360/prizes.length;const target=currentRotation+rounds*360-index*sector;currentRotation=target;wheel.style.transform=`rotate(${target}deg)`;setTimeout(()=>{spinning=false;wheel.classList.remove("spinning");title.textContent=`🎉 당첨! ${prizes[index]} 🎉`;title.title="눌러서 다시 룰렛 돌리기";fireConfetti()},2050)}
+function spin(){if(spinning)return;spinning=true;title.classList.add("spinning");wheel.classList.add("spinning");const index=Math.floor(Math.random()*prizes.length);const rounds=5+Math.floor(Math.random()*3);const sector=360/prizes.length;const target=currentRotation+rounds*360-index*sector;currentRotation=target;wheel.style.transform=`rotate(${target}deg)`;setTimeout(()=>{spinning=false;wheel.classList.remove("spinning");title.classList.remove("spinning");title.textContent=`당첨! ${prizes[index]}`;title.title="눌러서 다시 룰렛 돌리기";fireConfetti()},2050)}
 wheel.addEventListener("click",spin);wheel.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();spin()}});title.addEventListener("click",spin);if("serviceWorker" in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js"));
 </script>
 </body>
